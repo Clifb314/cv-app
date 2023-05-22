@@ -1,27 +1,35 @@
 import React, { useState } from "react";
+import emptyPerson from "./blanks/emptyPerson";
+import Print from "./print";
 
 const Form = () => {
-    const [personal, setPersonal] = useState(emptyPerson)
+  const [personal, setPersonal] = useState(emptyPerson);
+  const [display, setDisplay] = useState(0);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target
-        setPersonal(() => ({
-            [name]: value,
-        }))
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPersonal((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
-    }
+  const handleSubmit = (e) => {
+    e.target.form.preventDefault();
 
-    const handleSubmit = (e) => {
-        const { name, value } = e.target
+    setDisplay(display + 1);
 
-        //maybe print out the results
+    //maybe print out the results
+  };
 
-    }
+  let screen;
+  if (display === 1) {
+    screen = <Print input={personal} />;
+  }
 
-
-
-    return (
-        <form id="basic">
+  if (display === 0) {
+    screen = (
+      <form id="basic">
         <p>First, please enter some personal information</p>
         <fieldset form="basic">
           <label htmlFor="fname">First Name: </label>
@@ -84,8 +92,11 @@ const Form = () => {
             Submit Section
           </button>
         </fieldset>
-        </form>
-    )
-}
+      </form>
+    );
+  }
 
-export default Form
+  return <div id="personal">{screen}</div>;
+};
+
+export default Form;
