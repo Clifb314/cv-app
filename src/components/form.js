@@ -4,7 +4,7 @@ import Print from "./print";
 
 const Form = () => {
   const [personal, setPersonal] = useState(emptyPerson);
-  const [display, setDisplay] = useState(0);
+  const [basicDisplay, setBasicDisplay] = useState(0);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,19 +15,17 @@ const Form = () => {
   };
 
   const handleSubmit = (e) => {
-    e.target.form.preventDefault();
-
-    setDisplay(display + 1);
+    setBasicDisplay(1);
 
     //maybe print out the results
   };
 
   let screen;
-  if (display === 1) {
+  if (basicDisplay === 1) {
     screen = <Print input={personal} />;
   }
 
-  if (display === 0) {
+  if (basicDisplay === 0) {
     screen = (
       <form id="basic">
         <p>First, please enter some personal information</p>

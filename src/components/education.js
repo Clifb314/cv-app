@@ -5,30 +5,29 @@ import { v4 as uuid } from "uuid";
 
 const Education = () => {
   const [eduList, setEduList] = useState(emptyEdu);
-  const [schools, setSchools] = useState(0);
+  const [eduDisplay, setEduDisplay] = useState(0);
   const [prints, setPrints] = useState(0);
 
   let form;
 
   const handleChange = (e) => {
-    const value = e.target.type === "radio" ? e.target.checked : e.target.value
-    const name = e.target.name
+    const value = e.target.type === "radio" ? e.target.checked : e.target.value;
+    const name = e.target.name;
 
     setEduList((prevState) => ({
       ...prevState,
       [name]: value,
     }));
 
-    console.log(eduList)
+    console.log(eduList);
   };
 
   const handleSubmit = (e) => {
-
-    setSchools(schools + 1);
+    setEduDisplay(1);
     setPrints(1);
 
-    ({ schools, ...rest } = eduList)
-    const newEdu = rest
+    const { schools, ...rest } = eduList;
+    const newEdu = rest;
 
     setEduList((prevState) => ({
       schools: [...prevState.schools, newEdu],
@@ -40,20 +39,75 @@ const Education = () => {
       end: "",
     }));
 
-    console.log(eduList)
+    console.log(eduList);
   };
 
   const increase = (e) => {
     handleSubmit(e);
 
-    setSchools(0);
+    setEduDisplay(0);
   };
   let printDisplay;
   if (prints === 1) {
-    printDisplay = <Print input={eduList.schools} />;
+    printDisplay = eduList.schools.map((college) => {
+      return (
+        <div className="colleges">
+          <Print input={college} />
+          <button
+            type="button"
+            className="editBtn"
+            onClick={(e) => editCollege(e, college.id)}
+          >
+            Edit?
+          </button>
+          <button
+            type="button"
+            className="deleteBtn"
+            onClick={(e) => editCollege(e, college.id)}
+          >
+            Delete?
+          </button>
+        </div>
+      );
+    });
+  } else {
+    printDisplay = null;
   }
 
-  if (schools === 0) {
+  const editCollege = (e, id) => {
+    const fxn = e.target.className;
+
+    let newArr = eduList.schools.filter((college) => {
+      if (college.id !== id) {
+        return college;
+      }
+    });
+
+    let filtered = eduList.schools
+      .filter((college) => {
+        if (college.id === id) {
+          return college;
+        }
+      })
+      .shift();
+
+    if (fxn === "editBtn") {
+      setEduList({
+        ...filtered,
+        schools: [...newArr],
+      });
+    }
+
+    if (fxn === "deleteBtn") {
+      setEduList((prevState) => ({
+        ...prevState,
+        schools: [...newArr],
+      }));
+    }
+    setEduDisplay(0);
+  };
+
+  if (eduDisplay === 0) {
     form = (
       <form className="education">
         <fieldset form="school">
@@ -118,6 +172,8 @@ const Education = () => {
         </fieldset>
       </form>
     );
+  } else {
+    form = null;
   }
 
   return (
