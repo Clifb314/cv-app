@@ -110,8 +110,8 @@ const Education = () => {
   if (eduDisplay === 0) {
     form = (
       <form className="education">
-        <fieldset form="school">
-          <label htmlFor="school">College Name:</label>
+        <fieldset form="education">
+          <label htmlFor="schoolName">College Name:</label>
           <input
             type="text"
             name="schoolName"

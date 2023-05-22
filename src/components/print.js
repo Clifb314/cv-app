@@ -17,16 +17,16 @@ const Print = ({ input }) => {
   }
 
   if (input.schoolName) {
-    const grad = input.grad === false ? "No" : "Yes"
+    const grad = input.grad === false ? "No" : "Yes";
     return (
-        <div className="education">
-            <p>College Name: {input.schoolName}</p>
-            <p>Field of Study: {input.study}</p>
-            <p>Graduated? : {grad}</p>
-            <p>Start Date: {input.start}</p>
-            <p>End Date: {input.end}</p>
-        </div>
-    )
+      <div className="education">
+        <p>College Name: {input.schoolName}</p>
+        <p>Field of Study: {input.study}</p>
+        <p>Graduated? : {grad}</p>
+        <p>Start Date: {input.start}</p>
+        <p>End Date: {input.end}</p>
+      </div>
+    );
   }
 };
 
