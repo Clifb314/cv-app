@@ -77,18 +77,10 @@ const Education = () => {
   const editCollege = (e, id) => {
     const fxn = e.target.className;
 
-    let newArr = eduList.schools.filter((college) => {
-      if (college.id !== id) {
-        return college;
-      }
-    });
+    let newArr = eduList.schools.filter((college) => college.id !== id);
 
     let filtered = eduList.schools
-      .filter((college) => {
-        if (college.id === id) {
-          return college;
-        }
-      })
+      .filter((college) => college.id === id)
       .shift();
 
     if (fxn === "editBtn") {
@@ -110,22 +102,23 @@ const Education = () => {
   if (eduDisplay === 0) {
     form = (
       <form className="education">
+        <p>Enter your education history</p>
         <fieldset form="education">
-          <label htmlFor="schoolName">College Name:</label>
+          <label htmlFor="schoolName">College Name: </label>
           <input
             type="text"
             name="schoolName"
             value={eduList.schoolName}
             onChange={handleChange}
           />
-          <label htmlFor="study">Field of Study/Major:</label>
+          <label htmlFor="study">Field of Study/Major: </label>
           <input
             type="text"
             name="study"
             value={eduList.study}
             onChange={handleChange}
           />
-          <div>
+          <div className="radio">
             <p>Did you graduate?</p>
             <label htmlFor="gradY">Yes</label>
             <input
@@ -146,27 +139,27 @@ const Education = () => {
               onChange={handleChange}
             />
           </div>
-          <label htmlFor="start">Start Date:</label>
+          <label htmlFor="start">Start Date: </label>
           <input
             type="date"
             name="start"
             value={eduList.start}
             onChange={handleChange}
           />
-          <label htmlFor="end">End Date:</label>
+          <label htmlFor="end">End Date: </label>
           <input
             type="date"
             name="end"
             value={eduList.end}
             onChange={handleChange}
           />
-          <button type="buttons" onClick={handleSubmit}>
+          <button type="buttons" onClick={handleSubmit} className="submit">
             Submit Section
           </button>
           {/* <button type="button" onClick={remove}>
             Remove
           </button> */}
-          <button type="button" onClick={increase}>
+          <button type="button" onClick={increase} className="add">
             Add another college?
           </button>
         </fieldset>

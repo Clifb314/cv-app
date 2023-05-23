@@ -86,7 +86,12 @@ const Form = () => {
             value={personal.pnum}
             onChange={handleChange}
           />
-          <button type="submit" form="basic" onClick={handleSubmit}>
+          <button
+            type="submit"
+            form="basic"
+            onClick={handleSubmit}
+            className="submit"
+          >
             Submit Section
           </button>
         </fieldset>

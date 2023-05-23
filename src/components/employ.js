@@ -8,12 +8,48 @@ const Employment = () => {
   const [jobDisp, setJobDisp] = useState(0);
   const [printJob, setPrintJob] = useState(0);
 
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+
+    setJobList((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    setJobDisp(1);
+    setPrintJob(1);
+
+    const { jobs, ...rest } = jobList;
+    const newJob = rest;
+
+    setJobList((prevState) => ({
+      jobs: [...prevState.jobs, newJob],
+      id: uuid(),
+      name: "",
+      title: "",
+      city: "",
+      start: "",
+      end: "",
+      pay: "",
+      reason: "",
+    }));
+  };
+
+  const increase = (e) => {
+    handleSubmit(e);
+
+    setJobDisp(0);
+  };
+
   let jobForm;
   if (jobDisp === 0) {
     jobForm = (
       <form className="employ">
+        <p>Enter your employment history</p>
         <fieldset form="employ">
-          <label htmlFor="name">Naame of Employer: </label>
+          <label htmlFor="name">Name of Employer: </label>
           <input
             type="text"
             name="name"
@@ -56,11 +92,11 @@ const Employment = () => {
             onChange={handleChange}
           />
           <label htmlFor="reason">Reason for Leaving: </label>
-          <textarea value={jobList.reason} onChange={handleChange} />
-          <button type="buttons" onClick={handleSubmit}>
+          <textarea name="reason" value={jobList.reason} onChange={handleChange} />
+          <button type="button" onClick={handleSubmit} className="submit">
             Submit Section
           </button>
-          <button type="button" onClick={increase}>
+          <button type="button" onClick={increase} className="add">
             Add another Employer?
           </button>
         </fieldset>
@@ -70,17 +106,27 @@ const Employment = () => {
     jobForm = null;
   }
 
-  const handleChange = (e) => {
-    const { value, name } = e.target
-    setJobDisp(1)
-    setPrintJob(1)
+  const editJob = (e, id) => {
+    const fxn = e.target.className;
 
-    setJobList(prevState => ({
+    let newArr = jobList.jobs.filter((job) => job.id !== id);
+
+    let filtered = jobList.jobs.filter((job) => job.id === id).shift();
+
+    if (fxn === "editBtn") {
+      setJobList({
+        ...filtered,
+        jobs: [...newArr],
+      });
+    }
+
+    if (fxn === "deleteBtn") {
+      setJobList((prevState) => ({
         ...prevState,
-        [name]: value,
-    }))
-  }
-  //need handleSubmit then done?
+        jobs: [...newArr],
+      }));
+    }
+  };
 
   let printList;
   if (printJob === 1) {
@@ -106,46 +152,15 @@ const Employment = () => {
       );
     });
   } else {
-    printList = null
+    printList = null;
   }
-
-  const editJob = (e, id) => {
-    const fxn = e.target.className
-
-    let newArr = jobList.jobs.filter(job => {
-        if (job.id !== id) {
-            return job
-        }
-    })
-
-    let filtered = jobList.jobs.filter(job => {
-        if (job.id === id) {
-            return job
-        }
-    }).shift()
-
-    if (fxn === "editBtn") {
-        setJobList({
-            ...filtered,
-            jobs: [...newArr]
-        })
-    }
-
-    if (fxn === "deleteBtn") {
-        setJobList(prevState => ({
-            ...prevState,
-            jobs: [...newArr]
-        }))
-    }
-  }
-
 
   return (
-    <div className="jobs">
-        {printList}
-        {jobForm}
+    <div id="jobs">
+      {printList}
+      {jobForm}
     </div>
-  )
+  );
 };
 
-export default Employment
+export default Employment;

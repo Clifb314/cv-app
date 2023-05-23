@@ -1,13 +1,138 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+div#personal,
+div#edu,
+div#jobs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+div.display {
+  border: black 2px solid;
+  padding: 10px;
+  background-color: rgb(198, 247, 230);
+  text-align: left;
+}
+
+div.radio {
+  align-self: flex-start;
+}
+
+input[type="radio"] {
+  display: inline;
+  width: 15px;
+  padding: 15px;
+  height: 15px;
+}
+
+div.radio label {
+  padding: 6px;
+}
+
+div.colleges {
+  display: grid;
+}
+
+div.jobs {
+  display: grid;
+}
+
+form {
+  width: 75%;
+  margin: 12px;
+  padding: 2px;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, 0.2);
+  padding: 4px 15%;
+}
+
+label {
+  text-align: left;
+  align-self: flex-start;
+  display: inline-block;
+  margin-bottom: 2px;
+}
+
+input {
+  display: inline-block;
+  align-self: flex-start;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+button {
+  width: 200px;
+  padding: 6px 2px;
+  margin: 4px;
+  cursor: pointer;
+  transition: 250ms ease-in-out;
+  border-radius: 5px;
+  border: none;
+}
+
+button:hover {
+  font-weight: 700;
+}
+
+button.submit {
+  background-color: rgb(56, 33, 189);
+  color: white;
+}
+
+button.submit:hover {
+  color: rgb(56, 33, 189);
+  background-color: white;
+}
+
+button.add {
+  color: white;
+  background-color: rgb(26, 88, 202);
+}
+
+button.add:hover {
+  background-color: white;
+  color: rgb(26, 88, 202);
+}
+
+button.deleteBtn, button.editBtn {
+  display: inline;
+  width: 40%;
+}
+
+button.editBtn {
+  color: white;
+  background-color: green;
+}
+
+button.deleteBtn {
+  color: white;
+  background-color: red;
+}
+
+button.editBtn:hover {
+ color: green;
+ background-color: white; 
+}
+
+button.deleteBtn:hover {
+  background-color: white;
+  color: red;
 }
