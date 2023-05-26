@@ -125,7 +125,7 @@ const Education = () => {
               type="radio"
               name="grad"
               id="gradY"
-              value="true"
+              value={true}
               checked={eduList.grad === true}
               onChange={handleChange}
             />
@@ -134,7 +134,7 @@ const Education = () => {
               type="radio"
               name="grad"
               id="gradN"
-              value="false"
+              value={false}
               checked={eduList.grad === false}
               onChange={handleChange}
             />
